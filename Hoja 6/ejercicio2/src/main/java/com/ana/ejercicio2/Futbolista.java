@@ -1,4 +1,4 @@
-package com.ana.ejercicio1;
+package com.ana.ejercicio2;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

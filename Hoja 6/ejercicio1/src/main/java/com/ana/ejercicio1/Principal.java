@@ -47,112 +47,119 @@ public class Principal
 //        listaFutbolistas.add(f3);
 //        listaFutbolistas.add(f4);
 //        escribirFichero(ruta, listaFutbolistas);
-List<Futbolista> listaprueba = crearLista(ruta);
-for (Futbolista futbolista : listaprueba)
-{
-    System.out.println(futbolista.toString());
-}
-System.out.println("MENÚ DE OPCIONES");
-System.out.println("1-Imprimir listado de futbolistas");
-System.out.println("2-");
-int opcion;
-opcion = teclado.nextInt();
-switch (opcion)
-{
-    case 1:
-        //imprimir el contenido del documento
-        List<String> listaf = leerFutbolistas(ruta);
-        for (String linea : listaf)
-            
-        {
-            System.out.println(linea);
-        }
-        
-        break;
-    case 2:
-        /* Muestra un listado con el id, nombre, apellidos y posición de los futbolistas del equipo
-        cuyo código se hay introducido por teclado.*/
-        System.out.println("Teclea código de equipo");
-        String codigo = teclado.nextLine();
-        List<Futbolista> listafu = listaEquipo(ruta, codigo);
-        for (Futbolista futbolista : listafu)
-        {
-            System.out.println(String.format("%10s|%20s|%30s ", futbolista.getNombre(), futbolista.getApellidos(), futbolista.getPuesto()));
-        }
-        
-        break;
-    case 3:
-        /**
-         * Opción 3: Pide el alias de un futbolista por teclado y escribe en pantalla los
-         * datos de todos los futbolistas que tienen ese alias.
-         */
-        System.out.println("Teclea alias de jugador");
-        String alias = teclado.nextLine();
-        
-        Optional<Futbolista> futbolista = null;
-        List<Futbolista> lista = new ArrayList();
-        lista = crearLista(ruta);
-        for (Futbolista fut : lista)
-        {
-            if (fut.getNombre().equalsIgnoreCase(alias))
+            List<Futbolista> listaprueba = crearLista(ruta);
+            for (Futbolista futbolista : listaprueba)
             {
-                futbolista = fut;//tampoco sé castear esto
                 System.out.println(futbolista.toString());
             }
-        }
-        break;
-    case 4:
-        /*
+            System.out.println("MENÚ DE OPCIONES");
+            System.out.println("1-Imprimir listado de futbolistas");
+            System.out.println("2-Listado de futbolistas de equipo");
+            System.out.println("3- Búsqueda de futbolista");
+            System.out.println("4-Creación de fichero de equipo");
+            System.out.println("5- Listado de fichero de equipo");
+            System.out.println("6-Mostrar todos los ficheros de equipo");
+            System.out.println("0- Salir");
+            int opcion;
+            opcion = teclado.nextInt();
+            switch (opcion)
+            {
+                case 1:
+                    //imprimir el contenido del documento
+                    List<String> listaf = leerFutbolistas(ruta);
+                    for (String linea : listaf)
+
+                    {
+                        System.out.println(linea);
+                    }
+
+                    break;
+                case 2:
+                    /* Muestra un listado con el id, nombre, apellidos y posición de los futbolistas del equipo
+        cuyo código se hay introducido por teclado.*/
+                    System.out.println("Teclea código de equipo");
+                    String codigo = teclado.nextLine();
+                    teclado.nextLine();
+                    List<Futbolista> listafu = listaEquipo(ruta, codigo);
+                    for (Futbolista futbolista : listafu)
+                    {
+                        System.out.println(String.format("%10s|%20s|%30s ", futbolista.getNombre(), futbolista.getApellidos(), futbolista.getPuesto()));
+                    }
+
+                    break;
+                case 3:
+                    /**
+                     * Opción 3: Pide el alias de un futbolista por teclado y escribe en pantalla
+                     * los datos de todos los futbolistas que tienen ese alias.
+                     */
+                    System.out.println("Teclea alias de jugador");
+                    String alias = teclado.nextLine();
+
+                    Optional<Futbolista> futbolista = null;
+                    List<Futbolista> lista = new ArrayList();
+                    lista = crearLista(ruta);
+                    for (Futbolista fut : lista)
+                    {
+                        if (fut.getNombre().equalsIgnoreCase(alias))
+                        {
+                            futbolista = fut;//tampoco sé castear esto
+                            System.out.println(futbolista.toString());
+                        }
+                    }
+                    break;
+                case 4:
+                    /*
         Opción 4: Pide por teclado el código de un equipo y crea un fichero de datos,
         cuyo nombre es el código del equipo y la extensión es csv.
-        */
-        System.out.println("introduce código de equipo");
-        String cod = teclado.nextLine();
-        String nombreDoc = cod + ".csv";
-        //creo el documento
-        Path doc = Paths.get(nombreDoc);
-        if (Files.notExists(doc))
-        {
-            System.out.println("La ruta no existe. El documento se creará");
-            try
-            {
-                Files.createFile(doc);
-            } catch (IOException e)
-            {
-                System.err.println("Error de E/S al crear el fichero");
-            }
-        }
-        //ahora hay que escribir en él los futbolistas de ese equipo
-        //los recuperamos del documento en una lista de Futbolista
-        List<Futbolista> listaxequipo = listaEquipo(ruta, cod);
-        //escribir esta lista en el documento
-        escribirFichero(doc, listaxequipo);
-        
-        break;
-    case 5:
-        /*Se pide por teclado el nombre de un fichero de datos de futbolistas de un equipo (los
+                     */
+                    System.out.println("introduce código de equipo");
+                    String cod = teclado.nextLine();
+                    teclado.nextLine();
+                    String nombreDoc = cod + ".csv";
+                    //creo el documento
+                    Path doc = Paths.get(nombreDoc);
+                    if (Files.notExists(doc))
+                    {
+                        System.out.println("La ruta no existe. El documento se creará");
+                        try
+                        {
+                            Files.createFile(doc);
+                        } catch (IOException e)
+                        {
+                            System.err.println("Error de E/S al crear el fichero");
+                        }
+                    }
+                    //ahora hay que escribir en él los futbolistas de ese equipo
+                    //los recuperamos del documento en una lista de Futbolista
+                    List<Futbolista> listaxequipo = listaEquipo(ruta, cod);
+                    //escribir esta lista en el documento
+                    escribirFichero(doc, listaxequipo);
+
+                    break;
+                case 5:
+                    /*Se pide por teclado el nombre de un fichero de datos de futbolistas de un equipo (los
         creados en opción 4) y lista los datos de todos los futbolistas de ese fichero.*/
-        System.out.println("Introduce nombre de fichero");
-        String nombre=teclado.nextLine();
-        Path fichero=Paths.get(nombre);
-        List<Futbolista> documentoSolicitado = crearLista(fichero);
-        //mostrar los datos de los futbolistas de este fichero
-        for (Futbolista futbol : documentoSolicitado)
-        {
-            System.out.println(futbol.toString());
-        }
-        
-        break;
-    case 6:
-        /*Opción 6: Se mostrarán todos los ficheros csv que haya en el directorio del proyecto.*/
-        Stream<Path> stream = Files.list(Paths.get(System.getProperty(".")));
-        stream.map(p -> p.getFileName().toString())
-                .filter(p -> p.contains(".csv"))
-                .sorted()
-                .forEach(System.out::println);
-        break;
-        
-}
+                    System.out.println("Introduce nombre de fichero");
+                    String nombre = teclado.nextLine();
+                    Path fichero = Paths.get(nombre);
+                    List<Futbolista> documentoSolicitado = crearLista(fichero);
+                    //mostrar los datos de los futbolistas de este fichero
+                    for (Futbolista futbol : documentoSolicitado)
+                    {
+                        System.out.println(futbol.toString());
+                    }
+
+                    break;
+                case 6:
+                    /*Opción 6: Se mostrarán todos los ficheros csv que haya en el directorio del proyecto.*/
+                    Stream<Path> stream = Files.list(Paths.get(System.getProperty(".")));
+                    stream.map(p -> p.getFileName().toString())
+                            .filter(p -> p.contains(".csv"))
+                            .sorted()
+                            .forEach(System.out::println);
+                    break;
+
+            }
         } catch (IOException ex)
         {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
