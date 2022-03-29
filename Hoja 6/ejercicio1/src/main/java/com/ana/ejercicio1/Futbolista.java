@@ -111,7 +111,7 @@ private String codEquipo;
     }
 
 public String toCSV(){
-    DateTimeFormatter f=DateTimeFormatter.ofPattern("dd/MM/yyyy");
-return String.format("%d,%s,%s,%s,%1.2f,%s",id, nombre,apellidos, puesto, altura, fechaNac.format(f), codEquipo);
+    //DateTimeFormatter f=DateTimeFormatter.ofPattern("dd de MM de yyyy");
+return String.format("%d,%s,%s,%s,%1.2f,%s",id, nombre,apellidos, puesto, altura, fechaNac, codEquipo);
         }
 }
