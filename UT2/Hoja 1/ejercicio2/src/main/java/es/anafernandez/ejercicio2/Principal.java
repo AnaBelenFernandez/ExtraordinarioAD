@@ -41,13 +41,18 @@ public class Principal {
              case 1:
                  System.out.println(gestor.ListarFutbolistas(documento));
                  break;
-             case 2:
-         
-                 /*Opción 2: Pide por teclado todos los datos de un futbolista y lo añade al fichero XML insertando un
-elemento <futbolista> dentro del elemento <futbolistas>.*/
-                    for(Futbolista f: futbolistas){
+             case 2:         
+                          for(Futbolista f: futbolistas){
                         gestor.insertarFutbolista(f, documento);
              }
+                 break;
+             case 3:
+                 //buscar futbolistas de un equipo
+                 List<Futbolista> equipo=gestor.getFutbolistasEquipo("BCN", documento);
+                 for (Futbolista f : equipo) {
+                     System.out.println(f.toString());
+                     
+                 }
                  break;
              case 7:
                  gestor.convertirenXML(documento);
