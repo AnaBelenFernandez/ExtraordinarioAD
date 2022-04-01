@@ -22,7 +22,7 @@ public class Principal {
          Document documento=gestor.crearDocumento();
          List<Futbolista> futbolistas=new ArrayList();
          Futbolista f1=new Futbolista(Short.valueOf("1"), "Limao",Byte.valueOf("1"), 1.70f, "BCN");
-         Futbolista f2=new Futbolista(Short.valueOf("1"), "Cáncano",Byte.valueOf("2"), 1.70f, "BCN");
+         Futbolista f2=new Futbolista(Short.valueOf("2"), "Cáncano",Byte.valueOf("2"), 1.70f, "BCN");
          futbolistas.add(f1);
          futbolistas.add(f2);
          int opcion=10;
@@ -50,9 +50,17 @@ public class Principal {
                  //buscar futbolistas de un equipo
                  List<Futbolista> equipo=gestor.getFutbolistasEquipo("BCN", documento);
                  for (Futbolista f : equipo) {
-                     System.out.println(f.toString());
-                     
+                     System.out.println(f.toString());                     
                  }
+                 break;
+             case 4:
+                 //modificar equipo de un futbolista
+                 System.out.println(gestor.cambiarEquipoFutbolista(Short.valueOf("2"), documento, "MAD"));
+               
+                
+                 break;
+             case 5:
+                 //cambiar altura futbolista
                  break;
              case 7:
                  gestor.convertirenXML(documento);

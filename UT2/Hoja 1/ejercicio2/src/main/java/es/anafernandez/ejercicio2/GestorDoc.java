@@ -226,5 +226,44 @@ public class GestorDoc {
 
         return futbolista;
     }
+  public Futbolista cambiarEquipoFutbolista(short dorsal, Document documento, String equipo) {
+        Futbolista futbolista = null;
+        Element nodo = null;
+          String numeroBuscar = String.valueOf(dorsal);
+        Element raiz = (Element) documento.getFirstChild();
+        NodeList nodosFutbolista = raiz.getElementsByTagName("futbolista");
+        for (int i = 0; i < nodosFutbolista.getLength(); i++) {
+            nodo = (Element) nodosFutbolista.item(i);
+            String dorsalFutbolista=nodo.getElementsByTagName("numero").item(0).getTextContent();
+            if (dorsalFutbolista.equalsIgnoreCase(numeroBuscar)) {
+                nodo = (Element) nodosFutbolista.item(i);
+                nodo.setAttribute("equipo", equipo);
+                        }
+            futbolista = getFutbolista(nodo);
+            futbolista.setEquipo(equipo);
+           
+            
+        }
 
+        return futbolista;
+    }
+  
+    public Futbolista cambiarAlturaFutbolista(short dorsal, Document documento, float altura) {
+        Futbolista futbolista = null;
+        Element nodo = null;
+          String numeroBuscar = String.valueOf(dorsal);
+        Element raiz = (Element) documento.getFirstChild();
+        NodeList nodosFutbolista = raiz.getElementsByTagName("futbolista");
+        for (int i = 0; i < nodosFutbolista.getLength(); i++) {
+            nodo = (Element) nodosFutbolista.item(i);
+            String dorsalFutbolista=nodo.getElementsByTagName("numero").item(0).getTextContent();
+            if (dorsalFutbolista.equalsIgnoreCase(numeroBuscar)) {
+                nodo = (Element) nodosFutbolista.item(i);
+            }
+            futbolista = getFutbolista(nodo);
+            futbolista.setAltura(altura);            
+        }
+
+        return futbolista;
+    }
 }

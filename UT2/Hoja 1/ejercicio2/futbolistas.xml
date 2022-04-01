@@ -6,4 +6,10 @@
         <posicion>1</posicion>
         <altura>1.7</altura>
     </futbolista>
+    <futbolista equipo="MAD">
+        <numero>2</numero>
+        <alias>Cáncano</alias>
+        <posicion>2</posicion>
+        <altura>1.7</altura>
+    </futbolista>
 </futbolistas>
