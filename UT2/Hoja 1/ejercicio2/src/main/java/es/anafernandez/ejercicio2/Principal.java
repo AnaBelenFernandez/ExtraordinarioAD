@@ -61,6 +61,7 @@ public class Principal {
                  break;
              case 5:
                  //cambiar altura futbolista
+                 System.out.println(gestor.cambiarAlturaFutbolista(Short.valueOf("1"), documento, 1.90f));
                  break;
              case 7:
                  gestor.convertirenXML(documento);
