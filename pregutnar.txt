@@ -1,3 +1,0 @@
-COSAS QUE NO FUNCIONAN
-Hoja 3:
-ejercicio 3 case 2: no encuentra el nombre buscado.
