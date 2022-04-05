@@ -1,0 +1,5 @@
+fl_im_txt
+mod-col2
+a-link-img contact
+text-intro padBT25 bgColor
+a-boton
