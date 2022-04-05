@@ -14,6 +14,8 @@ public class DepartamentosHandler extends DefaultHandler{
     
     private List<Departamento> departamentos;
     private StringBuilder valorElemento;
+    private Empleado empleado;
+    boolean esEmpleado;
 
     public List<Departamento> getDepartamentos()
     {
@@ -38,15 +40,23 @@ public class DepartamentosHandler extends DefaultHandler{
         switch (qName)
         {
             case "departamento" ->
-            {
+            {esEmpleado=false;
                 System.out.println("Datos de Departamento" + (departamentos.size() + 1));
                 departamentos.add(new Departamento());
                 System.out.print("Teléfono del Departamento: " +  attributes.getValue("telefono") + "\n");
                 System.out.print("Tipo de Departamento: " +  attributes.getValue("tipo") + "\n");
                 this.departamentos.get(departamentos.size()-1).setTelefono(attributes.getValue("telefono"));
-                this.departamentos.get(departamentos.size()-1).setTipo(attributes.getValue("tipo"));
+                this.departamentos.get(departamentos.size()-1).setTipo((attributes.getValue("tipo")));
             }
-            case "codigo", "nombre" ->
+             case "empleado" ->
+            {esEmpleado=true;
+                System.out.println("Datos de Empleado" + (departamentos.size() + 1));
+                empleados.add(new Empleado());
+                System.out.print("Salario del empleado: " +  attributes.getValue("salario") + "\n");               
+                this.empleados.get(empleados.size()-1).setSalario(Integer.valueOf(attributes.getValue("salario")));
+               
+            }
+            case "codigo", "nombre","puesto" ->
                 this.valorElemento = new StringBuilder();
         }
     }
@@ -65,16 +75,21 @@ public class DepartamentosHandler extends DefaultHandler{
     public void endElement(String uri, String localName, String qName) throws SAXException
     {
         super.endElement(uri, localName, qName);
-        //Evaluamos las marcas de fin que necesitemos
-        switch (qName)
+                switch (qName)
         {
             case "codigo" ->
             {
                 System.out.println("\tCodigo: " + this.valorElemento);
                 this.departamentos.get(this.departamentos.size() - 1).setCodigo(this.valorElemento.toString());
             }
+             case "puesto" ->
+            {
+                System.out.println("\tPuesto: " + this.valorElemento);
+                this.empleados.get(this.empleados.size() - 1).setPuesto(this.valorElemento.toString());
+            }
             case "nombre" ->
             {
+                //como hay nombre en el departamento y en el empleaod hay que diferenciarlos
                 System.out.println("\tNombre: " + this.valorElemento);
                 this.departamentos.get(this.departamentos.size() - 1).setNombre(this.valorElemento.toString());
 
