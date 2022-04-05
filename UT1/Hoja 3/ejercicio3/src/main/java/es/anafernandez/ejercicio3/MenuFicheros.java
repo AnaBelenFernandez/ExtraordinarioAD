@@ -105,8 +105,8 @@ la lista*/
                         /*Se recogen por teclado el nombre y apellidos de una persona y, si se encuentra en el
 fichero, se elimina del fichero. Para hacer esto se necesita un fichero auxiliar en el que se van
 guardando todos los nombres que no se tengan que eliminar.*/
-                        String nombreborrar=recogerDatos();
-                        
+                        String nombreborrar = recogerDatos();
+
                         break;
 
                 }
@@ -205,12 +205,14 @@ guardando todos los nombres que no se tengan que eliminar.*/
         }
         return apellidos;
     }
-    public static void buscarYBorrar(String nombre){
-    BufferedReader br = null;
-            try
+
+    public static void buscarYBorrar(String nombre)
+    {
+        BufferedReader br = null;
+        try
         {
             br = new BufferedReader(new FileReader("personas.txt"));
-        
+
             String linea = "";
             while ((linea = br.readLine()) != null)
             {
@@ -219,5 +221,9 @@ guardando todos los nombres que no se tengan que eliminar.*/
                     apellidos.add(linea + "\n");
                 }
             }
-    }
-}
+        } catch (FileNotFoundException ex)
+        {
+            Logger.getLogger(MenuFicheros.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+}}

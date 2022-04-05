@@ -1,5 +1,6 @@
 package com.ana.ejercicio2;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,22 +9,26 @@ import java.util.List;
  */
 public class Departamento {
     private String telefono;
-    private char tipo;
+    private String tipo;
     private String codigo;    
     private String nombre;
     List<Empleado> empleados;
 
     public Departamento()
-    {
+    {this.empleados =new ArrayList();
     }
 
-    public Departamento(String telefono, char tipo, String codigo, String nombre, List<Empleado> empleados)
+    public Departamento(String telefono, String tipo, String codigo, String nombre, List<Empleado> empleados)
     {
         this.telefono = telefono;
         this.tipo = tipo;
         this.codigo = codigo;
         this.nombre = nombre;
-        this.empleados = empleados;
+        this.empleados = new ArrayList();
+    }
+    
+    public void insertarEmpleado(Empleado empleado){
+    empleados.add(empleado);
     }
 
     public String getTelefono()
@@ -36,12 +41,12 @@ public class Departamento {
         this.telefono = telefono;
     }
 
-    public char getTipo()
+    public String getTipo()
     {
         return tipo;
     }
 
-    public void setTipo(char tipo)
+    public void setTipo(String tipo)
     {
         this.tipo = tipo;
     }
