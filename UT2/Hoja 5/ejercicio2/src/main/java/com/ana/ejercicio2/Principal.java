@@ -1,5 +1,6 @@
 package com.ana.ejercicio2;
 
+import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -83,6 +84,29 @@ public class Principal
                     for (Track track : exitos)
                     {
                         System.out.println(track.toString());
+                    }
+                    break;
+                case 3:
+                    //20 artistas más escuchados por un usuario con GSON
+                    URL url3 = new URL("https://ws.audioscrobbler.com/2.0/?method=user.gettopartists&user=Amusiqueta&api_key=1b69eab503a0c4b333b88b9947a33709&format=json&limit=20");
+                    URLConnection conexion3 = url3.openConnection();
+                    try (
+                             BufferedReader lector3 = new BufferedReader(new InputStreamReader(conexion3.getInputStream())))
+                    {
+                        Gson gson = new Gson();
+                        Topartists artistas3 = gson.fromJson(lector3, Topartists.class);
+                        for (Artist a : artistas3.getArtist())
+                        {
+                            System.out.println(a.toString());
+                        }
+                        lector3.close();
+
+                    } catch (MalformedURLException ex)
+                    {
+                        System.out.println("Error " + ex.getMessage());
+                    } catch (IOException ex)
+                    {
+                        System.out.println("Error " + ex.getMessage());
                     }
                     break;
             }
