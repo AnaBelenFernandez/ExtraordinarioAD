@@ -103,7 +103,7 @@ la lista*/
                         }
 
                         break;
-                    case 5://!!no me copia el fichero!!!!!
+                    case 5://Aquí tengo un problema con las tildes al copiar el archivo, por eso no hago el rename
                         /*Se recogen por teclado el nombre y apellidos de una persona y, si se encuentra en el
 fichero, se elimina del fichero. Para hacer esto se necesita un fichero auxiliar en el que se van
 guardando todos los nombres que no se tengan que eliminar.*/
@@ -122,7 +122,7 @@ guardando todos los nombres que no se tengan que eliminar.*/
                                 bw.newLine();
                             
                             }
-                            
+                           
                         }
                         bw.close();
                         //rename
