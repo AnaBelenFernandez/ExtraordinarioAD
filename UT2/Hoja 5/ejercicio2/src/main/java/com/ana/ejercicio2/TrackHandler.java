@@ -71,13 +71,13 @@ public class TrackHandler extends DefaultHandler
         super.endElement(uri, localName, qName);
         switch (qName)
         {
-            case "url" ->
+            case "url":
             {
 
                 this.canciones.get(canciones.size() - 1).setUrl(this.valorElemento.toString());
             }
 
-            case "name" ->
+            case "name" :
             {
                 //como hay nombre en la canción y en el artista hay que diferenciarlos
                 {

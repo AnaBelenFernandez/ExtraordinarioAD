@@ -14,6 +14,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.nio.file.Files;
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -33,6 +35,7 @@ public class MenuFicheros
         Scanner teclado = new Scanner(System.in);
         Random random = new Random();
         int opcion = 0;
+        String linea="";
         BufferedWriter bw = null;
         BufferedReader br = null;
         do
@@ -62,8 +65,7 @@ public class MenuFicheros
                         break;
                     case 2:
                         br = new BufferedReader(new FileReader("personas.txt"));
-                        String linea;
-                        String nombreC = recogerDatos();
+                                  String nombreC = recogerDatos();
                         boolean encontrado = false;
                         while ((linea = br.readLine()) != null)
                         {
@@ -101,11 +103,31 @@ la lista*/
                         }
 
                         break;
-                    case 5:
+                    case 5://!!no me copia el fichero!!!!!
                         /*Se recogen por teclado el nombre y apellidos de una persona y, si se encuentra en el
 fichero, se elimina del fichero. Para hacer esto se necesita un fichero auxiliar en el que se van
 guardando todos los nombres que no se tengan que eliminar.*/
                         String nombreborrar = recogerDatos();
+                        File copia=new File("copia.txt");
+                        br = new BufferedReader(new FileReader("personas.txt"));  
+                        bw=new BufferedWriter(new OutputStreamWriter(new FileOutputStream(copia, true), "utf-8"));
+                        while ((linea = br.readLine()) != null)
+                        {
+                            if (linea.equalsIgnoreCase(nombreborrar))
+                            {
+                                System.out.println("Se va a borrar este nombre" + linea);
+                                
+                            }else{
+                                bw.write(linea);
+                                bw.newLine();
+                            
+                            }
+                            
+                        }
+                        bw.close();
+                        //rename
+                      
+                        
 
                         break;
 
@@ -206,24 +228,4 @@ guardando todos los nombres que no se tengan que eliminar.*/
         return apellidos;
     }
 
-    public static void buscarYBorrar(String nombre)
-    {
-        BufferedReader br = null;
-        try
-        {
-            br = new BufferedReader(new FileReader("personas.txt"));
-
-            String linea = "";
-            while ((linea = br.readLine()) != null)
-            {
-                if (linea.startsWith(iniciales.toUpperCase()))
-                {
-                    apellidos.add(linea + "\n");
-                }
-            }
-        } catch (FileNotFoundException ex)
-        {
-            Logger.getLogger(MenuFicheros.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    
-}}
+ }

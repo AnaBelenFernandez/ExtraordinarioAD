@@ -2,26 +2,25 @@
 package com.ana.ejercicio2;
 
 import java.util.List;
+import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.ana.ejercicio2.Artist;
-import javax.annotation.processing.Generated;
 
 @Generated("jsonschema2pojo")
 public class Topartists {
 
     @SerializedName("artist")
     @Expose
-    private List<Artist> artist = null;
+    private List<Artistjtp> artist = null;
     @SerializedName("@attr")
     @Expose
     private Attr__1 attr;
 
-    public List<Artist> getArtist() {
+    public List<Artistjtp> getArtist() {
         return artist;
     }
 
-    public void setArtist(List<Artist> artist) {
+    public void setArtist(List<Artistjtp> artist) {
         this.artist = artist;
     }
 
