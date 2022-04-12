@@ -1,5 +1,5 @@
 
-package com.ana.ejercicio2;
+package com.ana.ejercicio2.clasesJson;
 
 import java.util.List;
 import javax.annotation.Generated;
@@ -7,7 +7,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 @Generated("jsonschema2pojo")
-public class Artistjtp {
+public class Artist {
 
     @SerializedName("streamable")
     @Expose
@@ -30,6 +30,34 @@ public class Artistjtp {
     @SerializedName("name")
     @Expose
     private String name;
+
+    /**
+     * No args constructor for use in serialization
+     * 
+     */
+    public Artist() {
+    }
+
+    /**
+     * 
+     * @param image
+     * @param mbid
+     * @param streamable
+     * @param playcount
+     * @param name
+     * @param attr
+     * @param url
+     */
+    public Artist(String streamable, List<Image> image, String mbid, String url, String playcount, Attr attr, String name) {
+        super();
+        this.streamable = streamable;
+        this.image = image;
+        this.mbid = mbid;
+        this.url = url;
+        this.playcount = playcount;
+        this.attr = attr;
+        this.name = name;
+    }
 
     public String getStreamable() {
         return streamable;
@@ -85,6 +113,11 @@ public class Artistjtp {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+       return "Nombre: "+this.name+" url: "+this.url+" escuchado "+this.playcount+ " veces.";
     }
 
 }
