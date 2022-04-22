@@ -1,0 +1,125 @@
+{
+  "nombre": "Andalucia",
+  "capital": {
+    "nombre": "Sevilla",
+    "habitantes": 690000.0
+  },
+  "provincias": [
+    "Almería",
+    "Cádiz",
+    "Córdoba",
+    "Granada",
+    "Huelva",
+    "Jaén",
+    "Sevilla",
+    "Málaga",
+    "Asturias",
+    "Cantabria"
+  ],
+  "extension": 87368.0
+}
+{
+  "nombre": "Aragón",
+  "provincias": [
+    "Huesca",
+    "Teruel",
+    "Zaragoza"
+  ],
+  "extension": 46500.0
+}
+{
+  "nombre": "Islas Baleares",
+  "provincias": [
+    "Baleares"
+  ],
+  "extension": 4992.0
+}
+{
+  "nombre": "Canarias",
+  "capital": {
+    "nombre": "Santa Cruz de Tenerife",
+    "habitantes": 222000.0
+  },
+  "provincias": [
+    "Las Palmas",
+    "Santa Cruz de Tenerife"
+  ],
+  "extension": 7447.0
+}
+{
+  "nombre": "Cantabria",
+  "capital": {
+    "nombre": "Santander",
+    "habitantes": 180000
+  },
+  "provincias": [
+    "Cantabria"
+  ],
+  "extension": 5321
+}
+{
+  "nombre": "Asturias",
+  "capital": {
+    "nombre": "Oviedo",
+    "habitantes": 220000
+  },
+  "provincias": [
+    "Asturias"
+  ],
+  "extension": 10604
+}
+{
+  "nombre": "Castilla-La Mancha",
+  "capital": {
+    "nombre": "Toledo",
+    "habitantes": null
+  },
+  "provincias": [
+    "Albacete",
+    "Ciudad Real",
+    "Cuenca",
+    "Guadalajara",
+    "Toledo"
+  ],
+  "extension": 79461
+}
+{
+  "nombre": "Castilla y León",
+  "capital": null,
+  "provincias": [
+    "Valladolid",
+    "Palencia",
+    "Segovia",
+    "Salamanca",
+    "Ávila",
+    "Burgos",
+    "León"
+  ],
+  "extension": 96224
+}
+{
+  "nombre": "",
+  "capital": {
+    "nombre": "",
+    "habitantes": 200000
+  },
+  "extension": 548000
+}
+{
+  "nombre": "",
+  "capital": {
+    "nombre": "Terabitia",
+    "habitantes": 100
+  },
+  "extension": 15742,
+  "provincias": [
+    "",
+    "lora",
+    "aura",
+    "x"
+  ]
+}
+{
+  "nombre": "MugglePlace",
+  "extension": 87168.0
+}
