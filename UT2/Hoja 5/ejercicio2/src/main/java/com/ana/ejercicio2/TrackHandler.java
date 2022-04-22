@@ -2,7 +2,7 @@ package com.ana.ejercicio2;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.jar.Attributes;
+import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
@@ -33,25 +33,31 @@ public class TrackHandler extends DefaultHandler
     public void startElement(String uri, String localName, String qName, Attributes attributes)
             throws SAXException
     {
-        super.startElement(uri, localName, qName, (org.xml.sax.Attributes) attributes);
+        super.startElement(uri, localName, qName, attributes);
+//        switch(qName)
+//        {
+//            case "track" -> {}
+//        }      
         switch (qName)
         {
             case "track":
-            {
+
                 esCancion = true;
                 canciones.add(new Track());
                 this.canciones.get(canciones.size() - 1).setRank(Integer.valueOf(attributes.getValue("rank")));
-            }
-            case "artista":
-            {
-                esCancion = false;
+                break;
 
-            }
+            case "artist":
+                esCancion = false;
+                break;
 
             case "name":
                 this.valorElemento = new StringBuilder();
+                break;
+
             case "url":
                 this.valorElemento = new StringBuilder();
+                break;
         }
     }
 
@@ -72,30 +78,28 @@ public class TrackHandler extends DefaultHandler
         switch (qName)
         {
             case "url":
-            {
 
                 this.canciones.get(canciones.size() - 1).setUrl(this.valorElemento.toString());
-            }
+                break;
 
-            case "name" :
-            {
+            case "name":
                 //como hay nombre en la canción y en el artista hay que diferenciarlos
+
+                if (!esCancion)
                 {
-                    if (!esCancion)
-                    {
 
-                        this.canciones.get(this.canciones.size() - 1).setArtista(this.valorElemento.toString());
-                    } else
-                    {
-                        this.canciones.get(this.canciones.size() - 1).setNombre(this.valorElemento.toString());
-                    }
-
+                    this.canciones.get(this.canciones.size() - 1).setArtista(this.valorElemento.toString());
+                } else
+                {
+                    this.canciones.get(this.canciones.size() - 1).setNombre(this.valorElemento.toString());
                 }
+                break;
 
-            }
         }
     }
-      public List<Track> getExitos() {
+
+    public List<Track> getExitos()
+    {
         return canciones;
     }
 

@@ -1,5 +1,8 @@
 package com.ana.ejercicio2;
 
+import com.ana.ejercicio2.clasesJson.Artist;
+import com.ana.ejercicio2.clasesJson.ObjetoPrincipal;
+import com.ana.ejercicio2.clasesJson.Similar;
 import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,10 +24,13 @@ import org.xml.sax.SAXException;
  *
  * @author usuario
  */
-public class Principal {
+public class Principal
+{
 
-    public static void main(String[] args) {
-        try {
+    public static void main(String[] args)
+    {
+        try
+        {
             /*  1.- Datos de artistas más populares en tu país
             2.- 30 mejores temas de un artista
             3.- Datos de 20 artistas más populares de un usuario concreto
@@ -38,7 +44,8 @@ public class Principal {
             System.out.println("4- 10 artistas similares");
             opcion = teclado.nextInt();
             teclado.nextLine();
-            switch (opcion) {
+            switch (opcion)
+            {
                 case 1:
                     //indicar cuantos artistas se quieren ver
                     System.out.println("indica el número de artistas");
@@ -55,7 +62,8 @@ public class Principal {
                     parser.parse(is, manejador);
                     List<Artista> artistas = manejador.getArtistas();
                     System.out.println("Estos son los " + numero + " artistas más escuchados en España");
-                    for (int i = 1; i < numero + 1; i++) {
+                    for (int i = 1; i < numero + 1; i++)
+                    {
                         System.out.println(artistas.get(i).toString());
                     }
 
@@ -76,26 +84,31 @@ public class Principal {
                     List<Track> exitos = manejador2.getExitos();
                     System.out.println("Estos son los temas más escuchados de " + artista);
 
-                    for (Track track : exitos) {
+                    for (Track track : exitos)
+                    {
                         System.out.println(track.toString());
                     }
                     break;
                 case 3:
-                    //20 artistas más escuchados por un usuario con GSON
+                    //20 artistas más escuchados por un usuario con JSON
                     URL url3 = new URL("https://ws.audioscrobbler.com/2.0/?method=user.gettopartists&user=Amusiqueta&api_key=1b69eab503a0c4b333b88b9947a33709&format=json&limit=20");
                     URLConnection conexion3 = url3.openConnection();
                     try (
-                            BufferedReader lector3 = new BufferedReader(new InputStreamReader(conexion3.getInputStream()))) {
+                             BufferedReader lector3 = new BufferedReader(new InputStreamReader(conexion3.getInputStream())))
+                    {
                         Gson gson = new Gson();
-                        Topartists artistas3 = gson.fromJson(lector3, Topartists.class);
-                        for (Artistjtp a : artistas3.getArtist()) {
+                        ObjetoPrincipal objetoPrincipal = gson.fromJson(lector3, ObjetoPrincipal.class);
+                        for (Artist a : objetoPrincipal.getTopartists().getArtist())
+                        {
                             System.out.println(a.toString());
                         }
                         lector3.close();
 
-                    } catch (MalformedURLException ex) {
+                    } catch (MalformedURLException ex)
+                    {
                         System.out.println("Error " + ex.getMessage());
-                    } catch (IOException ex) {
+                    } catch (IOException ex)
+                    {
                         System.out.println("Error " + ex.getMessage());
                     }
                     break;
@@ -108,28 +121,36 @@ public class Principal {
                     URLConnection conexion4 = url4.openConnection();
                     //mostrar 10 artistas similares
                     try (
-                            BufferedReader lector4 = new BufferedReader(new InputStreamReader(conexion4.getInputStream()))) {
+                             BufferedReader lector4 = new BufferedReader(new InputStreamReader(conexion4.getInputStream())))
+                    {
                         Gson gson = new Gson();
-                        Topartists artistas4 = gson.fromJson(lector4, Topartists.class);
-                        for (Artistjtp a : artistas4.getArtist()) {
+                        Similar objeto = gson.fromJson(lector4, Similar.class);
+                        for (Artist a : objeto.getSimilarartists().getArtist())
+                        {
                             System.out.println(a.toString());
                         }
                         lector4.close();
 
-                    } catch (MalformedURLException ex) {
+                    } catch (MalformedURLException ex)
+                    {
                         System.out.println("Error " + ex.getMessage());
-                    } catch (IOException ex) {
+                    } catch (IOException ex)
+                    {
                         System.out.println("Error " + ex.getMessage());
                     }
                     break;
             }
-        } catch (MalformedURLException ex) {
+        } catch (MalformedURLException ex)
+        {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
+        } catch (IOException ex)
+        {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SAXException ex) {
+        } catch (SAXException ex)
+        {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParserConfigurationException ex) {
+        } catch (ParserConfigurationException ex)
+        {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

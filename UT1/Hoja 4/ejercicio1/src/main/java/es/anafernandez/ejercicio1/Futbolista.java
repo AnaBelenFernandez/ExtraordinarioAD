@@ -10,7 +10,7 @@ package es.anafernandez.ejercicio1;
  * @author DELL
  */
 public class Futbolista {
-  private short numero;
+  private int numero;
   private String alias;
           private byte posicion;
           private float altura;
@@ -19,7 +19,7 @@ public class Futbolista {
     public Futbolista() {
     }
 
-    public Futbolista(short numero, String alias, byte posicion, float altura, String equipo) {
+    public Futbolista(int numero, String alias, byte posicion, float altura, String equipo) {
         this.numero = numero;
         this.alias = alias;
         this.posicion = posicion;
@@ -27,11 +27,11 @@ public class Futbolista {
         this.equipo = equipo;
     }
 
-    public short getNumero() {
+    public int getNumero() {
         return numero;
     }
 
-    public void setNumero(short numero) {
+    public void setNumero(int numero) {
         this.numero = numero;
     }
 
