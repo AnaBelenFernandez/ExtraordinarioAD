@@ -1,27 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package es.anafernandez.ejercicio2;
+package com.ana.ejercicio2;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
- * @author DELL
+ * @author usuario
  */
-public class Moon {
-
-    public static void main(String[] args) throws IOException {
-        Scanner teclado = new Scanner(System.in);
-        System.out.println("introduce la ruta y nombre");
-        String ruta = teclado.nextLine();
+public class Principal {
+    public static void main(String[] args)
+    {
+        //leer un fichero de texto y quitarle los espacios
+        String ruta = "poesia.txt";
         FileInputStream fi = null;
         int c;
         try {
@@ -31,14 +22,12 @@ public class Moon {
                 //le decimos que no muestre los espacios en blanco
                 if (c != 32) {
                     //en el print convertimos el int a caracteres ascii
-                    System.out.print(c); 
-                }
+                    System.out.print(Character.toString(c));                }
             }
         } catch (FileNotFoundException ex) {
             System.out.println(ex.getMessage());
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
-
     }
 }

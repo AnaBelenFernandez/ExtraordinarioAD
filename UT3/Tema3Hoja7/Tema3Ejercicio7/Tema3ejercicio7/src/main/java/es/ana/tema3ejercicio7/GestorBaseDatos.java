@@ -143,7 +143,7 @@ public class GestorBaseDatos
             long c = coleccionAlumnos.countDocuments(eq("curso", curso.getString("_id")));
             System.out.println(c + " alumnos");
             /*otra manera de hacerlo*/
- /*MongoCursor<Document> cursor = coleccionAlumnos.aggregate(
+            /*MongoCursor<Document> cursor = coleccionAlumnos.aggregate(
                 Arrays.asList(
                         Aggregates.group("$curso", Accumulators.sum("num", 1))
                 )).iterator();*/
@@ -245,22 +245,22 @@ public class GestorBaseDatos
         if (curso != null)
         {//visualizamos los datos
             System.out.println("Curso seleccionado: \n" + curso.getString("titulo") + " horas: " + curso.getInteger("horas"));
-                   //cargo los alumnos del curso en un mongocursor con iterator
+            //cargo los alumnos del curso en un mongocursor con iterator
             MongoCursor<Document> alumnos = coleccionAlumnos.find(eq("curso", curso.getString("_id"))).iterator();
             //calculo el total de alumnos
-            long total= coleccionAlumnos.countDocuments(eq("curso", curso.getString("_id")));
+            long total = coleccionAlumnos.countDocuments(eq("curso", curso.getString("_id")));
             //voy sacando la nota media de cada alumno            
-            Double suma=0.0;
+            Double suma = 0.0;
             while (alumnos.hasNext())
             {
                 Document alumno = alumnos.next();
-                Double media=alumno.getDouble("nota_media");
-                suma+=media;              
-            }            
-            Double mediaCurso=suma/total;
+                Double media = alumno.getDouble("nota_media");
+                suma += media;
+            }
+            Double mediaCurso = suma / total;
+            //formateador de decimales
             DecimalFormat formateador = new DecimalFormat("####.##");
-            System.out.println("la media del curso es :"+ formateador.format(mediaCurso));
-
+            System.out.println("la media del curso es :" + formateador.format(mediaCurso));
         }
     }
 }

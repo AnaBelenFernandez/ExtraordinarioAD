@@ -20,7 +20,7 @@ public class Principal {
         //crear un nuevo directorio
         //le asigno un nombre
         String nombreDirectorio = "nuevoDir";
-        //instancio el file conl a ruta
+        //instancio el file con la ruta
         File nuevo = new File(nombreDirectorio);
         //creo el directorio
         Boolean creado = nuevo.mkdir();

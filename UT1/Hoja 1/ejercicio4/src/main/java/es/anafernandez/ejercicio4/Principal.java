@@ -37,6 +37,7 @@ public class Principal {
             //instanciamos el fichero
             String nombreFichero = "lobo";
             File fichero = new File("lobo");
+           
             switch (opcion) {
                 case 1:
                     //comprobar si es un directorio
