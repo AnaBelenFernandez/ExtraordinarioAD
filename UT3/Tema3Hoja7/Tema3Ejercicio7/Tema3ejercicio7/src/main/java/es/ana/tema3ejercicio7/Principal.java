@@ -39,10 +39,12 @@ public class Principal
                     gestor.alumnosPorCurso();
                     case 5 ->
                     gestor.ponerNotaMedia();
-                    //case 6 ->
-                    //gestor.imprimirProvincias(200);
-                    //case 7 ->
-                    //gestor.jsontoFile();
+                    case 6 ->
+                    gestor.calcularHoras();
+                    case 7 ->
+                    gestor.mostrarDatosAlumno();
+                    case 8->
+                        gestor.notaMediaCurso();
 
             }
         } while (opcion != 0);

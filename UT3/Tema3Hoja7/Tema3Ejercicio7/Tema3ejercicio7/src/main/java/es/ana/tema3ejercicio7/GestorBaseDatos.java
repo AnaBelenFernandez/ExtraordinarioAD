@@ -38,14 +38,14 @@ public class GestorBaseDatos
 
     public void ponerNotas()
     {//voy a buscar por título porque por id me da muchísimos problemas(PREGUNTAR)
-        System.out.println("Teclea titulo del curso");
-        String titulo = teclado.nextLine();
+        System.out.println("Teclea id del curso");
+        String id = teclado.nextLine();
         //tenemos el título--> vamos a buscar el curso en la bd y lo cargamos a un documento
-        Document Doc = coleccionCursos.find(eq("titulo", titulo)).first();
-        System.out.println("Curso seleccionado: \n" + Doc.getString("titulo") + " categoría: " + Doc.getString("categoria"));
+        Document Doc = coleccionCursos.find(eq("_id", id)).first();
         if (Doc != null)
         //si el curso existe, hay que recorrer la colección de alumnos de ese curso
         {
+            System.out.println("Curso seleccionado: \n" + Doc.getString("titulo") + " categoría: " + Doc.getString("categoria"));
             MongoCursor<Document> cursor = coleccionAlumnos.find(eq("curso", Doc.getString("_id"))).sort(ascending("apellidos", "nombre")).iterator();
             while (cursor.hasNext())
             {
@@ -73,10 +73,10 @@ public class GestorBaseDatos
         //añadir tema a array de temas del curso
         //un tema es un objeto{} con un String título y un int horas
         //buscar el curso
-        System.out.println("Teclea titulo del curso");
-        String titulo = teclado.nextLine();
+        System.out.println("Teclea id del curso");
+        String id = teclado.nextLine();
         //tenemos el título--> vamos a buscar el curso en la bd y lo cargamos a un documento
-        Document Doc = coleccionCursos.find(eq("titulo", titulo)).first();
+        Document Doc = coleccionCursos.find(eq("_id", id)).first();
         System.out.println("Curso seleccionado: \n" + Doc.getString("titulo") + " categoría: " + Doc.getString("categoria"));
         if (Doc != null)
         {
@@ -103,10 +103,10 @@ public class GestorBaseDatos
     public void listaAprobados()
     {
         //pido la identificación de un curso e imprimo el título y las horas
-        System.out.println("Teclea titulo del curso");
-        String titulo = teclado.nextLine();
+        System.out.println("Teclea id del curso");
+        String id = teclado.nextLine();
         //tenemos el título--> vamos a buscar el curso en la bd y lo cargamos a un documento
-        Document Doc = coleccionCursos.find(eq("titulo", titulo)).first();
+        Document Doc = coleccionCursos.find(eq("_id", id)).first();
         System.out.println("Curso seleccionado: \n" + Doc.getString("titulo") + " horas: " + Doc.getInteger("horas"));
         if (Doc != null)
         {//buscar alumnos de ese curso con nota_media 5 o mayor: son dos filtros AND
@@ -156,9 +156,9 @@ public class GestorBaseDatos
         System.out.println("introduce id de alumno");
         String id = teclado.nextLine();
         Document alumno = coleccionAlumnos.find(eq("_id", id)).first();
-        System.out.println(alumno.getString("nombre")+" nota media actual: "+alumno.getDouble("nota_media"));
         if (alumno != null)
         {
+            System.out.println(alumno.getString("nombre") + " nota media actual: " + alumno.getDouble("nota_media"));
             //coger las notas del array de notas
             List<Double> notas = new ArrayList();
             notas = alumno.getList("notas", Double.class);
@@ -168,18 +168,99 @@ public class GestorBaseDatos
             {
                 suma = suma + nota;
             }
-            double media=0.0;
+            double media = 0.0;
             if (notas.size() > 1)
             {
-               media = suma / notas.size();
+                media = suma / notas.size();
             }
             //ahora hay que agregar este dato al campo nota_media
-       UpdateResult updateResult = coleccionAlumnos.updateOne(eq("_id", alumno.getString("_id")), set("nota_media", media));
-       if(updateResult.wasAcknowledged()){
-           System.out.println("nota media modificada: "+alumno.getDouble("nota_media"));}
+            UpdateResult updateResult = coleccionAlumnos.updateOne(eq("_id", alumno.getString("_id")), set("nota_media", media));
+            if (updateResult.wasAcknowledged())
+            {
+                System.out.println("nota media modificada: " + alumno.getDouble("nota_media"));
+            }
         } else
         {
             System.out.println("el alumno no existe");
+        }
+    }
+
+    public void calcularHoras()
+    {
+        //pido la identificación de un curso e imprimo el título y las horas
+        System.out.println("Teclea id del curso");
+        String id = teclado.nextLine();
+        //tenemos el título--> vamos a buscar el curso en la bd y lo cargamos a un documento
+        Document Doc = coleccionCursos.find(eq("_id", id)).first();
+        if (Doc != null)
+        {//visualizamos los datos
+            System.out.println("Curso seleccionado: \n" + Doc.getString("titulo") + " horas: " + Doc.getInteger("horas"));
+            // calcular total de horas en función de las horas de los temas(las tengo que coger del array de objetos temas)
+            List<Document> temas = Doc.getList("temas", Document.class);
+            int totalHoras = 0;
+            for (Document tema : temas)
+            {
+                int horasTema = tema.getInteger("horas");
+                totalHoras += horasTema;
+            }
+            //ahora hay que agregar este dato al campo horas del curso
+            UpdateResult updateResult = coleccionCursos.updateOne(eq("_id", Doc.getString("_id")), set("horas", totalHoras));
+            if (updateResult.wasAcknowledged())
+            {
+                System.out.println("horas totales modificadas: " + Doc.getInteger("horas"));
+            } else
+            {
+                System.out.println("no se han modificado las horas");
+            }
+
+        } else
+        {
+            System.out.println("El curso no existe");
+        }
+
+    }
+
+    public void mostrarDatosAlumno()
+    {
+        //se busca un alumno por id
+        System.out.println("introduce id de alumno");
+        String id = teclado.nextLine();
+        Document alumno = coleccionAlumnos.find(eq("_id", id)).first();
+        if (alumno != null)
+        {
+            String codigoCurso = alumno.getString("curso");
+            Document curso = coleccionCursos.find(eq("_id", codigoCurso)).first();
+            System.out.println("Nombre: " + alumno.getString("nombre") + " \n Apellidos: " + alumno.getString("apellidos") + "\n Curso: " + curso.getString("titulo"));
+        }
+
+    }
+
+    public void notaMediaCurso()
+    {
+        //pido la identificación de un curso e imprimo el título y las horas
+        System.out.println("Teclea id del curso");
+        String id = teclado.nextLine();
+        //tenemos el título--> vamos a buscar el curso en la bd y lo cargamos a un documento
+        Document curso = coleccionCursos.find(eq("_id", id)).first();
+        if (curso != null)
+        {//visualizamos los datos
+            System.out.println("Curso seleccionado: \n" + curso.getString("titulo") + " horas: " + curso.getInteger("horas"));
+                   //cargo los alumnos del curso en un mongocursor con iterator
+            MongoCursor<Document> alumnos = coleccionAlumnos.find(eq("curso", curso.getString("_id"))).iterator();
+            //calculo el total de alumnos
+            long total= coleccionAlumnos.countDocuments(eq("curso", curso.getString("_id")));
+            //voy sacando la nota media de cada alumno            
+            Double suma=0.0;
+            while (alumnos.hasNext())
+            {
+                Document alumno = alumnos.next();
+                Double media=alumno.getDouble("nota_media");
+                suma+=media;              
+            }            
+            Double mediaCurso=suma/total;
+            DecimalFormat formateador = new DecimalFormat("####.##");
+            System.out.println("la media del curso es :"+ formateador.format(mediaCurso));
+
         }
     }
 }
