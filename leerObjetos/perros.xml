@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<perros>
+    <perro>
+        <nombre>Otto</nombre>
+        <raza>Border Collie</raza>
+    </perro>
+    <perro>
+        <nombre>Pixel</nombre>
+        <raza>Bobtail</raza>
+    </perro>
+    <perro>
+        <nombre>Draco</nombre>
+        <raza>Pastor Alemán</raza>
+    </perro>
+    <perro>
+        <nombre>Abelardo</nombre>
+        <raza>Fox Terrier</raza>
+    </perro>
+</perros>
