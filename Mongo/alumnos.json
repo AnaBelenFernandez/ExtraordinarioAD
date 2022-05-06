@@ -1,0 +1,129 @@
+[{
+	"_id": "1001",
+	"nombre": "Daniel",
+	"apellidos": "Seniosain Hoyos",
+	"curso": "001",
+	"nota_media": 5.6,
+	"notas":[]
+},
+{
+	"_id": "1002",
+	"nombre": "Ana Isabel",
+	"apellidos": "Camacho Soto",
+	"curso": "001",
+	"nota_media": 7.5,
+	"notas":[]
+},
+{
+	"_id": "1003",
+	"nombre": "Mario",
+	"apellidos": "Pacheco Lombana",
+	"curso": "001",
+	"nota_media": 6.3,
+	"notas":[]
+},
+{
+	"_id": "1004",
+	"nombre": "Jennifer",
+	"apellidos": "Balbontín Prieto",
+	"curso": "002",
+	"nota_media": 4.65,
+	"notas":[]
+},
+{
+	"_id": "1005",
+	"nombre": "Javier",
+	"apellidos": "Diaz Iturbe",
+	"curso": "002",
+	"nota_media": 6.7,
+	"notas":[]
+},
+{
+	"_id": "1006",
+	"nombre": "Raquel",
+	"apellidos": "San Román Avilés",
+	"curso": "002",
+	"nota_media": 5.35,
+	"notas":[]
+},
+{
+	"_id": "1007",
+	"nombre": "Ana",
+	"apellidos": "Pinta de la, Ruiz",
+	"curso": "004",
+	"nota_media": 4.75,
+	"notas":[]
+},
+{
+	"_id": "1008",
+	"nombre": "David",
+	"apellidos": "Valle Pérez",
+	"curso": "004",
+	"nota_media": 5.75,
+	"notas":[]
+},
+{
+	"_id": "1009",
+	"nombre": "Victoria",
+	"apellidos": "Martínez Balbas",
+	"curso": "003",
+	"nota_media": 6.25,
+	"notas":[]
+},
+{
+	"_id": "1010",
+	"nombre": "Samuel",
+	"apellidos": "Arce Samoila",
+	"curso": "003",
+	"nota_media": 9.15,
+	"notas":[]
+},
+{
+	"_id": "1011",
+	"nombre": "Henar",
+	"apellidos": "Pellón Fernández",
+	"curso": "003",
+	"nota_media": 3.6
+},
+{
+	"_id": "1012",
+	"nombre": "David",
+	"apellidos": "De la Vega Menéndez",
+	"curso": "002",
+	"nota_media": 5.4,
+	"notas":[]
+},
+{
+	"_id": "1013",
+	"nombre": "Rafael",
+	"apellidos": "Rodríguez Alonso",
+	"curso": "002",
+	"nota_media": 7.7,
+	"notas":[]
+},
+{
+	"_id": "1014",
+	"nombre": "Asier",
+	"apellidos": "González Solana",
+	"curso": "002",
+	"nota_media": 8.25,
+	"notas":[]
+},
+{
+	"_id": "1015",
+	"nombre": "Marta",
+	"apellidos": "Del Amo Herrero",
+	"curso": "001",
+	"nota_media": 9.5,
+	"notas":[]
+},
+{
+	"_id": "1016",
+	"nombre": "Gema",
+	"apellidos": "Martín Moreno",
+	"curso": "001",
+	"nota_media": 5.9,
+	"notas":[]
+}]
+
+

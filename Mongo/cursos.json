@@ -1,0 +1,41 @@
+[{
+	"_id": "001",
+	"titulo": "SQL desde cero",
+	"categoria": "Bases de datos",
+	"horas": 25,
+	"temas":[
+		{
+			"titulo":"Consultas y subconsultas",
+			"horas":30
+		},
+		{
+			"titulo":"Actualización de datos",
+			"horas":20
+		},
+		{
+			"titulo":"Consultas de agregado",
+			"horas":10
+		}
+	]
+},
+{
+	"_id": "002",
+	"titulo": "Bases de datos NoSQL. MongoDB",
+	"categoria": "Bases de datos",
+	"horas": 75,
+	"temas":[]
+},
+{
+	"_id": "003",
+	"titulo": "Instalación y configuración de PostgreSQL",
+	"categoria": "Bases de datos",
+	"horas": 50,
+	"temas":[]
+},
+{
+	"_id": "004",
+	"titulo": "Programación en Android",
+	"categoria": "Programación de aplicaciones móviles",
+	"horas": 75,
+	"temas":[]
+}]

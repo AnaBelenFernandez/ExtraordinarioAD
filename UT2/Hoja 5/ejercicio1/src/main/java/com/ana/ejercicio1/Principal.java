@@ -20,7 +20,7 @@ public class Principal
         {
             URL url1 = new URL("https://aplicaciones.ivanlorenzo.es/ad/dam2.xml");
             URL url = new URL("https://aplicaciones.ivanlorenzo.es/ad/dam2.json");
-            URLConnection conexion = url1.openConnection();//cambiar aquí la url para ver uno u otro documentos
+            URLConnection conexion = url.openConnection();//cambiar aquí la url para ver uno u otro documentos
             BufferedReader lector = new BufferedReader(new InputStreamReader(conexion.getInputStream()));
             String cadenaAsignaturas = lector.lines().
                     collect(Collectors.joining("\n"));

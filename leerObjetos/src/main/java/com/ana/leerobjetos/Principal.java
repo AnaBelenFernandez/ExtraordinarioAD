@@ -1,5 +1,8 @@
 package com.ana.leerobjetos;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -38,7 +41,7 @@ public class Principal
 {
     public static void main(String[] args)
     {
-        Path ficheroOriginal = Paths.get("perros");
+        Path ficheroOriginal = Paths.get("perros.txt");
         List<Perro> perros = new ArrayList();
         String raza = "";
         String nombre = "";
@@ -167,13 +170,29 @@ public class Principal
                         //lo sacamos por pantalla
                         System.out.println("<--lista SAX-->");
                         manejador.getPerros().stream().forEach(System.out::println);
-                        
+
                     } catch (ParserConfigurationException | SAXException | IOException ex)
                     {
                         System.out.println("Error al parsear el documento");
                     }
-                    
-
+//convertir la lista de perros a un fichero json (listaxml está completa con abelardo)
+                    BufferedWriter escritorJson = null;
+                    escritorJson = Files.newBufferedWriter(Paths.get("perros.json"));
+                    {
+                        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                        gson.toJson(listaxml, escritorJson);
+                    }
+                    escritorJson.close();
+//leer el json
+                    BufferedReader lector = Files.newBufferedReader(Paths.get("perros.json"));
+                    Gson gson = new Gson();
+                    Perro[] ps = gson.fromJson(lector, Perro[].class);
+                    System.out.println("<-------imprimir el JSON-------->");
+                    for (Perro perrito : ps)
+                    {
+                        System.out.println(perrito);
+                    }
+                    lector.close();
                 } catch (ParserConfigurationException e)
                 {
                     System.out.println(e.getMessage());
@@ -186,6 +205,7 @@ public class Principal
             {
                 Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
             }
+
         }
     }
 
