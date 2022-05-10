@@ -64,7 +64,7 @@ public class Principal {
              transformer.transform(source, result);
              
              //comprobación
-             Files.readAllLines(Paths.get("alumnos.xml")).stream().forEach(System.out::println);
+             Files.readAllLines(Paths.get("futbolistas.xml")).stream().forEach(System.out::println);
              
              
          } catch (ParserConfigurationException ex) {

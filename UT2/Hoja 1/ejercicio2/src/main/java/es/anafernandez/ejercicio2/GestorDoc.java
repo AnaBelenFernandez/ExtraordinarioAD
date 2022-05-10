@@ -34,11 +34,14 @@ import org.w3c.dom.Text;
  *
  * @author DELL
  */
-public class GestorDoc {
+public class GestorDoc
+{
 
-    public Document crearDocumento() {//creo un documento con su nodo raiz
+    public Document crearDocumento()
+    {//creo un documento con su nodo raiz
         Document documento = null;
-        try {
+        try
+        {
             DocumentBuilderFactory fabrica = DocumentBuilderFactory.newInstance();
             DocumentBuilder constructor = fabrica.newDocumentBuilder();
             documento = constructor.newDocument();
@@ -46,14 +49,17 @@ public class GestorDoc {
             //raiz
             Element futbolistas = documento.createElement("futbolistas");
             documento.appendChild(futbolistas);
-        } catch (ParserConfigurationException ex) {
+        } catch (ParserConfigurationException ex)
+        {
             Logger.getLogger(GestorDoc.class.getName()).log(Level.SEVERE, null, ex);
         }
         return documento;
     }
 
-    public void convertirenXML(Document documento) {
-        try {
+    public void convertirenXML(Document documento)
+    {
+        try
+        {
             //transformación
             Source source = new DOMSource(documento);
             Result result = new StreamResult(Files.newBufferedWriter(Paths.get("futbolistas.xml")));
@@ -62,16 +68,20 @@ public class GestorDoc {
             transformer.transform(source, result);
             //comprobación
             Files.readAllLines(Paths.get("futbolistas.xml")).stream().forEach(System.out::println);
-        } catch (IOException ex) {
+        } catch (IOException ex)
+        {
             Logger.getLogger(GestorDoc.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (TransformerException ex) {
+        } catch (TransformerException ex)
+        {
             Logger.getLogger(GestorDoc.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 
-    public Futbolista insertarFutbolista(Futbolista futbolista, Document documento) {
-        try {
+    public Futbolista insertarFutbolista(Futbolista futbolista, Document documento)
+    {
+        try
+        {
             Element elementFutbolista = documento.createElement("futbolista");
 //hijos de Futbolista
 // creo número y lo añado debajo de futbolista
@@ -106,26 +116,31 @@ public class GestorDoc {
             Node raiz = documento.getChildNodes().item(0);
             raiz.appendChild(elementFutbolista);
 
-        } catch (DOMException e) {
+        } catch (DOMException e)
+        {
             System.err.println("Error al añadir al DOM");
         }
         return futbolista;
     }
 
-    public String ListarFutbolistas(Document documento) {
+    public String ListarFutbolistas(Document documento)
+    {
         //Obtiene el primero nodo del DOM
         Element raiz = (Element) documento.getFirstChild();
         //lista de futbolistas en el documento
         NodeList futbolistas = raiz.getElementsByTagName("futbolista");
         //lista de atributos
         List<String> atributos = new ArrayList();
-        for (int i = 0; i < futbolistas.getLength(); i++) {
-            if (futbolistas.item(i).getNodeType() == Node.ELEMENT_NODE) {
+        for (int i = 0; i < futbolistas.getLength(); i++)
+        {
+            if (futbolistas.item(i).getNodeType() == Node.ELEMENT_NODE)
+            {
                 atributos.addAll(procesarAtributos(futbolistas.item(i)));
             }
         }
         String cadena = "Atributos de futbolistas:\n";
-        for (int i = 0; i < atributos.size(); i++) {
+        for (int i = 0; i < atributos.size(); i++)
+        {
             //si es posición par, es el nombre del atributo. Impar el valor del atributo
             cadena += "\t" + atributos.get(i);
             cadena += (i % 2 == 0) ? "=" : "\n";
@@ -138,17 +153,21 @@ public class GestorDoc {
             Node nodoFutbolista = nodosFutbolista.item(i);
             //Al ejecutar paso a paso este código, se observa como los nodos que encuentra son
             //de tipo 1 (ELEMENT_NODE) y tipo 3 (TEXT_NODE). 
-            if (nodoFutbolista.getNodeType() == Node.ELEMENT_NODE) { //Es un nodo Alumno que hay que procesar si es de tipo Elemento
+            if (nodoFutbolista.getNodeType() == Node.ELEMENT_NODE)
+            { //Es un nodo Alumno que hay que procesar si es de tipo Elemento
                 String[] datos_nodo = procesarFutbolista(nodoFutbolista);
                 cadena += String.format("| Dorsal: %-2s|", datos_nodo[0]);
                 cadena += String.format("| Alias: %3s |", datos_nodo[1]);
-                if (datos_nodo[2].equalsIgnoreCase("1")) {
+                if (datos_nodo[2].equalsIgnoreCase("1"))
+                {
                     cadena += String.format("| Posicion: portero |");
                 }
-                if (datos_nodo[2].equalsIgnoreCase("2")) {
+                if (datos_nodo[2].equalsIgnoreCase("2"))
+                {
                     cadena += String.format("| Posicion: defensa |");
                 }
-                if (datos_nodo[2].equalsIgnoreCase("3")) {
+                if (datos_nodo[2].equalsIgnoreCase("3"))
+                {
                     cadena += String.format("| Posicion: centrocampista |");
                 }
                 cadena += String.format("| Altura: %3s |", datos_nodo[3]);
@@ -158,12 +177,14 @@ public class GestorDoc {
         return cadena;
     }
 
-    private List<String> procesarAtributos(Node nodo) {
+    private List<String> procesarAtributos(Node nodo)
+    {
         List<String> atributos = new ArrayList();
 
         //Para saber cuantos atributos tiene el nodo
         int num = nodo.getAttributes().getLength();
-        for (int i = 0; i < num; i++) {
+        for (int i = 0; i < num; i++)
+        {
             //De la lista de atributos añade al ArrayList el nombre de cada atributo y su valor
             //Cada vez se añaden dos valores al ArrayList
             // en las posiciones pares habrá nombres de atributos y en las impares valores de atributos
@@ -173,13 +194,16 @@ public class GestorDoc {
         return atributos;
     }
 
-    private String[] procesarFutbolista(Node nodo) {
+    private String[] procesarFutbolista(Node nodo)
+    {
         String[] datos = new String[5];
         int contador = 0;
         NodeList nodos = nodo.getChildNodes();
-        for (int i = 0; i < nodos.getLength(); i++) {
+        for (int i = 0; i < nodos.getLength(); i++)
+        {
             Node nodoHijo = nodos.item(i);
-            if (nodoHijo.getNodeType() == Node.ELEMENT_NODE) {
+            if (nodoHijo.getNodeType() == Node.ELEMENT_NODE)
+            {
                 datos[contador] = nodoHijo.getChildNodes().item(0).getNodeValue();
                 contador++;
             }
@@ -187,19 +211,23 @@ public class GestorDoc {
         return datos;
     }
 
-    public List<Futbolista> getFutbolistasEquipo(String equipo, Document documento) {
+    public List<Futbolista> getFutbolistasEquipo(String equipo, Document documento)
+    {
         Futbolista futbolista = null;
-        List<Futbolista> futbolistas=new ArrayList();
+        List<Futbolista> futbolistas = new ArrayList();
         Element nodo = null;
         Element raiz = (Element) documento.getFirstChild();
         NodeList nodosFutbolista = raiz.getElementsByTagName("futbolista");
-        for (int i = 0; i < nodosFutbolista.getLength(); i++) {
+        for (int i = 0; i < nodosFutbolista.getLength(); i++)
+        {
             nodo = (Element) nodosFutbolista.item(i);
-            String atributoEquipo=nodo.getAttribute("equipo");
+            String atributoEquipo = nodo.getAttribute("equipo");
 //String textoEquipo = nodo.getElementsByTagName("equipo").item(0).getTextContent();
-            if (atributoEquipo.equalsIgnoreCase(equipo)) {
+            if (atributoEquipo.equalsIgnoreCase(equipo))
+            {
                 nodo = (Element) nodosFutbolista.item(i);
             }
+            //convierto el nodo en un objeto futbolista con el método get futbolista
             futbolista = getFutbolista(nodo);
             futbolistas.add(futbolista);
         }
@@ -207,9 +235,12 @@ public class GestorDoc {
         return futbolistas;
     }
 
-    private Futbolista getFutbolista(Node nodo) {
+    private Futbolista getFutbolista(Node nodo)
+    {
+        //convierte un nodo en un objeto
         Futbolista futbolista = null;
-        if (nodo.getNodeType() == Node.ELEMENT_NODE) {
+        if (nodo.getNodeType() == Node.ELEMENT_NODE)
+        {
             Element nodoFutbolista = (Element) nodo;
             //crear futbolista
             String num = nodoFutbolista.getElementsByTagName("numero").item(0).getTextContent();
@@ -226,43 +257,50 @@ public class GestorDoc {
 
         return futbolista;
     }
-  public Futbolista cambiarEquipoFutbolista(short dorsal, Document documento, String equipo) {
+
+    public Futbolista cambiarEquipoFutbolista(short dorsal, Document documento, String equipo)
+    {//cambiar atributo-->setAttribute
         Futbolista futbolista = null;
         Element nodo = null;
-          String numeroBuscar = String.valueOf(dorsal);
+        String numeroBuscar = String.valueOf(dorsal);
         Element raiz = (Element) documento.getFirstChild();
         NodeList nodosFutbolista = raiz.getElementsByTagName("futbolista");
-        for (int i = 0; i < nodosFutbolista.getLength(); i++) {
+        for (int i = 0; i < nodosFutbolista.getLength(); i++)
+        {
             nodo = (Element) nodosFutbolista.item(i);
-            String dorsalFutbolista=nodo.getElementsByTagName("numero").item(0).getTextContent();
-            if (dorsalFutbolista.equalsIgnoreCase(numeroBuscar)) {
+            String dorsalFutbolista = nodo.getElementsByTagName("numero").item(0).getTextContent();
+            if (dorsalFutbolista.equalsIgnoreCase(numeroBuscar))
+            {
                 nodo = (Element) nodosFutbolista.item(i);
                 nodo.setAttribute("equipo", equipo);
-                        }
+            }
             futbolista = getFutbolista(nodo);
             futbolista.setEquipo(equipo);
-           
-            
+
         }
 
         return futbolista;
     }
-  
-    public Futbolista cambiarAlturaFutbolista(short dorsal, Document documento, float altura) {
+
+    public Futbolista cambiarAlturaFutbolista(short dorsal, Document documento, float altura)
+    {//cambiar valor de un campo-->setNodeValue
         Futbolista futbolista = null;
         Element nodo = null;
-          String numeroBuscar = String.valueOf(dorsal);
-          String nuevaAltura=String.valueOf(altura);
+        String numeroBuscar = String.valueOf(dorsal);
+        String nuevaAltura = String.valueOf(altura);
         Element raiz = (Element) documento.getFirstChild();
         NodeList nodosFutbolista = raiz.getElementsByTagName("futbolista");
-        for (int i = 0; i < nodosFutbolista.getLength(); i++) {
+        for (int i = 0; i < nodosFutbolista.getLength(); i++)
+        {
             nodo = (Element) nodosFutbolista.item(i);
-            String dorsalFutbolista=nodo.getElementsByTagName("numero").item(0).getTextContent();
-            if (dorsalFutbolista.equalsIgnoreCase(numeroBuscar)) {
+            String dorsalFutbolista = nodo.getElementsByTagName("numero").item(0).getTextContent();
+            if (dorsalFutbolista.equalsIgnoreCase(numeroBuscar))
+            {
                 nodo = (Element) nodosFutbolista.item(i);
-                nodo.getElementsByTagName("altura").item(0).setNodeValue(nuevaAltura);            }
+                nodo.getElementsByTagName("altura").item(0).setNodeValue(nuevaAltura);
+            }
             futbolista = getFutbolista(nodo);
-            futbolista.setAltura(altura);            
+            futbolista.setAltura(altura);
         }
 
         return futbolista;
