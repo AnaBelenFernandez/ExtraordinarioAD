@@ -7,3 +7,19 @@ docker cp alumnos.json mongo-server:/root
  internet
 sudo mongoimport --db formacion --collection alumnos --file alumnos.json
 mongoimport --host mongo-server --db formacion --collection alumnos --type json --file alumnos.json --jsonArray 
+
+EXPORTAR A FICHERO
+bd
+mongoexport -u usuario --db geografia --collection ccaa --out ccaa_completo.json --jsonArray
+COLECCIÓN
+mongoexport -u usuario --db geografia --collection ccaa --out ccaa_completo.json --jsonArray --pretty
+IMPORTAR DE FICHERO
+
+
+```bash
+mongoimport -u usuario --db geografia --collection ccaa --file ccaa_completo.json
+```
+LA DIFERENCIA ES QUE ESTE FICHERO CONTIENE UN ARRAY DE OBJETOS
+
+```bash
+mongoimport -u usuario --db geografia --collection ccaa --file ccaa_completo.json --jsonArray
