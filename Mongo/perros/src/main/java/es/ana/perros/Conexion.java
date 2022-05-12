@@ -18,20 +18,22 @@ public class Conexion
   
 
     private Conexion()
-    {
-        try ( MongoClient cliente = MongoClients.create("mongodb://root:root@localhost:27017"))
+    { 
+       MongoClient cliente = MongoClients.create("mongodb://root:root@localhost:27017");
+
+        if (cliente != null)
         {
-            if (cliente != null)
-            {
-                System.out.println("Conexión OK");
-                db = cliente.getDatabase("perros");
-                coleccionPerros = db.getCollection("perross");
-               
-            } else
-            {
-                System.out.println("no se pudo realizar la conexión");
-            }
+            System.out.println("Conexión OK");
+            db = cliente.getDatabase("perros");
+            coleccionPerros = db.getCollection("perross");
         }
+        else
+        {
+            System.out.println("no se pudo realizar la conexión");
+        }
+    
+
+
     }
      public static Conexion getInstance()
     {
