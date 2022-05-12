@@ -3,10 +3,12 @@ package es.ana.perros;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Updates.addToSet;
 import static com.mongodb.client.model.Updates.set;
 import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.InsertOneResult;
 import com.mongodb.client.result.UpdateResult;
+import java.util.List;
 import java.util.Scanner;
 import org.bson.Document;
 
@@ -97,12 +99,69 @@ public class GestorBaseDatos
             System.out.println("Perro borrado correctamente " + nombre + " ya no figura en la base de datos");
         }
     }
-    public void verPerro(String nombre){
-     Document perro = coleccionPerros.find(eq("nombre", nombre)).first();
-      if (perro != null)
+
+    public void verPerro(String nombre)
+    {
+        Document perro = coleccionPerros.find(eq("nombre", nombre)).first();
+        if (perro != null)
         {
-            System.out.println("El perro se llama "+perro.getString("nombre")+ "y es de raza "+ perro.getString("raza"));
+            System.out.println("El perro se llama " + perro.getString("nombre") + "y es de raza " + perro.getString("raza"));
         }
     }
-}
-        
+
+    public void addDueño(String nombre, String nombreDueño, int telefono)
+    {  //un dueño es un objeto{} con un String nombre y un int telefono
+        //buscar el perro
+        Document perro = coleccionPerros.find(eq("nombre", nombre)).first();
+        System.out.println("Perro al que asignaremos dueño: \n" + perro.getString("nombre"));
+        if (perro != null)
+        {
+            //si el perro existe, hay que crear un documento con el string y el int y añadirlo 
+            Document dueño = new Document("nombre", nombreDueño).append("telefono", telefono);
+            UpdateResult updateResult = coleccionPerros.updateOne(eq("nombre", perro.getString("nombre")), set("dueño", dueño));
+            if (updateResult.wasAcknowledged())
+            {
+                System.out.println("Dueño añadido");
+            }
+        } else
+        {
+            System.out.println("El perro no está en nuestra base de datos");
+        }
+
+    }
+
+    public void addVacunas(String nombre, List<String> vacunas)
+    {      //añadir un array de strings al objeto perro
+        Document perro = coleccionPerros.find(eq("nombre", nombre)).first();
+        if (perro != null)
+        {  //si el perro existe, hay que ponerle un atributo vacunas que es una lista de Strings
+            UpdateResult updateResult = coleccionPerros.updateOne(eq("nombre", perro.getString("nombre")), set("vacunas", vacunas));
+            if (updateResult.wasAcknowledged())
+            {
+                System.out.println("Vacunas añadidas");
+            }
+        } else
+        {
+            System.out.println("El perro no está en nuestra base de datos");
+        }
+
+    }
+
+    public void nuevaVacuna(String nombre, String vacuna)
+    {
+        {
+            Document perro = coleccionPerros.find(eq("nombre", nombre)).first();
+
+//si el perro existe, hay que añadir una vacuna al array 
+                UpdateResult updateResult = coleccionPerros.updateOne(eq("nombre", perro.getString("nombre")), addToSet("vacunas", vacuna));
+            if (updateResult.wasAcknowledged())
+            {
+                System.out.println("Vacuna añadida");
+
+            } else
+            {
+                System.out.println("El perro no está en nuestra base de datos");
+            }
+
+        }}}
+    

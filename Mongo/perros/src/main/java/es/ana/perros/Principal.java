@@ -1,5 +1,8 @@
 package es.ana.perros;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -17,6 +20,7 @@ public class Principal
         gestor = new GestorBaseDatos();
         Scanner teclado=new Scanner(System.in);
         int opcion;
+          List< String> vacunas=Arrays.asList("Rabia", "Parvo", "Trivalente");
         do
         {
             System.out.println("1.-Añadir perro \n"
@@ -25,7 +29,10 @@ public class Principal
                     + "4.- Número de perros por raza.\n"
                     + "5.- Modificar nombre perro \n"
                     + "6.- Eliminar un perro \n"
-                    + "7.- Datos de perro \n"                    
+                    + "7.- Datos de perro \n" 
+                    + "8.- Insertar dueño \n" 
+                    + "9.- Insertar lista de vacunas \n" 
+                    + "10.- nueva vacuna \n" 
                     + "0.- SALIR");
             opcion = teclado.nextInt();
             switch (opcion)
@@ -44,6 +51,12 @@ public class Principal
                     gestor.borrarPerro("Abelardo");
                 case 7->
                     gestor.verPerro("Otto");
+                case 8->
+                    gestor.addDueño("Otto","Ana", 639693507);
+                case 9->
+                    gestor.addVacunas("Otto",vacunas);
+                case 10->
+                    gestor.nuevaVacuna("Otto","moquillo");
             }
         } while (opcion != 0);
     }
